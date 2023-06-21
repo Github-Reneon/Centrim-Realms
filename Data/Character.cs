@@ -3,7 +3,15 @@
     //Abstract Class
     public abstract class Character
     {
-        string Name { get; set; }
+        public string Name { get; set; }
+
+        public int MaxHp { get; set; }
+
+        public List<IClass> Classes { get; set; }
+        public int Level
+        {
+            get { return Classes.Count; }
+        }
     }
 
 
@@ -11,8 +19,24 @@
     {
         int Age { get; set; }
         IRace Race { get; set; }
-        List<IClass> Levels { get; set; }
+        public string? BackStory { get; set; }
+        public Player(string name, int age, IRace race, IClass startingClass)
+        {
+            Name = name;
+            Age = age;
+            Race = race;
+            Classes = new List<IClass>() { startingClass };
+        }
+        public Player(string name, int age, IRace race, List<IClass> classes, string backStory)
+        {
+            Name = name;
+            Age = age;
+            Race = race;
+            Classes = classes;
+            BackStory = backStory;
+        }
     }
+
     public class Enemy : Character
     {
         public int Level { get; set; }

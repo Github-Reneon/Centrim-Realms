@@ -1,8 +1,10 @@
 ﻿namespace Centrim_Realms.Data
 {
-    internal interface IClass
+    public interface IClass
     {
-        int Level { get; set; }
         List<IAbility> Abilities { get; set; }
+        int Level {
+            get { return Abilities.Count; }
+        }
     }
 }

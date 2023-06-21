@@ -3,9 +3,8 @@
     
     public interface IAbility
     {
-        int LevelUnlock { get; set; }
-        string AbilityDescription { get; set; }
-
-        void ExecuteOnCharacter(Character character);
+        int LevelUnlock { get; }
+        string AbilityDescription { get; }
+        void ExecuteOnCharacter(out Character character);
     }
 }
