@@ -1,11 +1,27 @@
 ﻿namespace Centrim_Realms.Data
 {
-    //Abstract Class
+    // Class used for PCs and enemies. NPCs will just be forms I think.
     public abstract class Character
     {
         public string Name { get; set; }
 
         public int MaxHp { get; set; }
+
+        private int _Hp;
+
+        public int Hp { 
+            get => _Hp;
+            set {
+                if (value > MaxHp)
+                {
+                    _Hp = MaxHp;
+                }
+                else
+                {
+                    _Hp = value;
+                }
+            } 
+        }
 
         public List<IClass> Classes { get; set; }
         public int Level
@@ -14,12 +30,24 @@
         }
     }
 
-
+    // PC class 
+    /// <summary>
+    /// Represents a player character, including a character information.
+    /// </summary>
     public class Player : Character
     {
-        int Age { get; set; }
-        IRace Race { get; set; }
-        public string? BackStory { get; set; }
+        protected int Age { get; set; }
+        protected IRace Race { get; set; }
+        protected string? BackStory { get; set; }
+        
+        // Init fresh
+        /// <summary>
+        /// Player constructor used for creating a new player character.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="race"></param>
+        /// <param name="startingClass"></param>
         public Player(string name, int age, IRace race, IClass startingClass)
         {
             Name = name;
@@ -27,6 +55,16 @@
             Race = race;
             Classes = new List<IClass>() { startingClass };
         }
+
+        // Init reload
+        /// <summary>
+        /// Player constructor used for recreating a player character.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="race"></param>
+        /// <param name="classes"></param>
+        /// <param name="backStory"></param>
         public Player(string name, int age, IRace race, List<IClass> classes, string backStory)
         {
             Name = name;
@@ -37,6 +75,9 @@
         }
     }
 
+    /// <summary>
+    /// Represents something the PC can fight.
+    /// </summary>
     public class Enemy : Character
     {
         public int Level { get; set; }
