@@ -1,0 +1,37 @@
+﻿@using Centrim_Realms.Data
+@inject AIResponseService AIService
+
+<div class="container rounded shadow p-3 m-3 bg-light">
+    <h3>CreateWorldInstance</h3>
+
+    <MudTextField Variant="Variant.Text" @bind-Value=@searchString></MudTextField>
+    <MudButton Variant="Variant.Filled" OnClick="DescribeWorld" Class="m-3">Create World!</MudButton>
+
+    <div class="countainer rounded bg-dark text-light p-2" >
+        @if (descriptionString == null) {
+            <span class="spinner-border"></span>
+        } else {
+            <MudText Typo="Typo.body1">@descriptionString</MudText>
+        }
+    </div>
+
+</div>
+
+
+
+@code {
+    string? searchString = "";
+    string? descriptionString = "";
+
+    protected async Task DescribeWorld() {
+        if (searchString != "" && searchString != null) {
+            descriptionString = null;
+            StateHasChanged();
+            descriptionString = await AIService.CreateWorld(searchString);
+            StateHasChanged();
+        } else {
+            descriptionString = "Please name a world.";
+            StateHasChanged();
+        }
+    }
+}

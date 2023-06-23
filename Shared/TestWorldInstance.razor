@@ -1,0 +1,15 @@
+﻿@using Centrim_Realms.Data
+
+<WorldCard WorldInstance=@world />
+
+@code {
+
+    World world;
+
+    protected override Task OnInitializedAsync()
+    {
+        world = new World();
+
+        return base.OnInitializedAsync();
+    }
+}

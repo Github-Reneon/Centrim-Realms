@@ -1,0 +1,19 @@
+﻿@using Centrim_Realms.Data
+
+@if (WorldInstance != null)
+{
+    <MudCard>
+        <MudCardMedia Image=@WorldInstance?.Image Height="200"/>
+        <MudCardContent>
+            <MudText Typo="Typo.h5">@WorldInstance?.Name</MudText>
+            <MudText Typo="Typo.body2">@WorldInstance?.Description</MudText>
+        </MudCardContent>
+    </MudCard>
+} else {
+    <p>Card is broken. Worldinstance is null.</p>
+}
+
+@code {
+    [Parameter]
+    public World? WorldInstance { get; set; }
+}
